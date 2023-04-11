@@ -11,7 +11,7 @@
 
 import requests 
 import json
-from FDAPackage.FDA import *
+from functionsPackage.functions import *
 
 response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=TlerFrZJS7oeM0DePkwbeLJoSvUXpaxfw62lXxNL&query=Cheddar%20Cheese')
 

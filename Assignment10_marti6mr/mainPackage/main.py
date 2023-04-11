@@ -1,17 +1,28 @@
+#Name: Carl Lewis (Luke Brooks, Tatianna Stryjewski, and Matthew Martin)
+#email: stryjete@mail.uc.edu
+#Assignment Title: Assignment 06
+#Course: IS 4010
+#Semester/Year: Spring 2023
+#Brief Description: Using JSON and API
+#Citations: https://fdc.nal.usda.gov/api-guide.html
+#Anything else that's relevant: The API is the different types of cheese
+# registered with the FDA
 #main.py
 
-import requests
+import requests 
 import json
-from functionsPackage.functions import *
+from FDAPackage.FDA import *
 
-response = requests.get('https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fapi.nal.usda.gov%2Ffdc%2Fv1%2Ffoods%2Fsearch%3Fapi_key%3DTlerFrZJS7oeM0DePkwbeLJoSvUXpaxfw62lXxNL%26query%3DCheddar%2520Cheese&data=05%7C01%7Cmarti6mr%40mail.uc.edu%7Ceb844876b7e94aa91a8e08db35eb3367%7Cf5222e6c5fc648eb8f0373db18203b63%7C0%7C0%7C638163056509174398%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=SPkcaQD1cumenyAJdbcgQP0lGKXePI9Gfvw8NtuCeTs%3D&reserved=0')
+response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=TlerFrZJS7oeM0DePkwbeLJoSvUXpaxfw62lXxNL&query=Cheddar%20Cheese')
 
 json_string = response.content
 
-parsed_json = json.loads(json_string)
+parsed_json = json.loads(json_string) #putting results into a dictionary
 
-nutrientData = iterate_dictionary(parsed_json)
-print(nutrientData)
+#iterate_dictionary(parsed_json) #invoking the function and passing it parsed_json
 
-unique_ingredients = set(food['description']for food in parsed_json['foods'])
-#print(unique_ingredients)
+#print(parsed_json)
+
+unique_ingredients = set(food['description'] for food in parsed_json['foods'])
+print("The different types of cheese descriptions under the FDAs website are as follows:" , unique_ingredients) 
+# cheese is displayed at the front, followed by different types
